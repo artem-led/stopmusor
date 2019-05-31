@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="col-xl-12">
+        <h1 class="text-center text-uppercase my-3">Новости</h1>
+    </div>
+    {% if news %}
+
+        {% for n in news %}
+        
+        <div class="col-xl-12">
+            <div class="card my-2 text-center">
+                <img class="rounded mx-auto" style="height:400px" src={{ n.image.url }} alt="..." >
+                <div class="card-header news-gradient">{{ n.title }}</div>
+                <div class="card-body text-secondary">
+                    <h4 class="card-title">{{ n.slug }}</h4>
+                    <p class="card-text" style="text-align: justify">{{ n.body }}</p>
+                    <p class="card-footer">Posted by: {{ n.author }} at {{ n.posted }}</p>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    {% else %}
+
+        <h2 class="text-center text-uppercase my-3">Сейчас нет новостей</h2>
+
+    {% endif %}
+{% endblock %}

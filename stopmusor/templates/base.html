@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}<title>STOP MUSOR!!!</title>{%  endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="../static/js/avtocomplit.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% load static %}
+    <!-- <link rel="stylesheet" href="{% static '/css/styles.css' %}"> -->
+</head>
+<body>
+    <div class="container">
+        <!-- <div class="row"> -->
+        {% block sidebar %}
+        <nav class="row navbar sticky-top navbar-expand-md navbar-dark bg-primary">
+            <!-- <a class="navbar-brand" href="#">Логотип</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+            <a class="navbar-brand" href="#">
+                <img src="../static/img/Kamaz.jpg" width="50" height="50" alt="...">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="collapse navbar-collapse" id="navbar1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active border-right px-xl-4 px-lg-2" >
+                        <a class="nav-link" href="{% url 'index' %}">Главная <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active border-right px-xl-4 px-lg-2">
+                        <a class="nav-link" href="/news/">Новости <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown active border-right px-xl-4 px-lg-2">
+                        <a class="nav-link" href="/service/">Услуги<span class="sr-only">(current)</span></a>
+                       <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Услуги</a>
+                         <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                            <a class="dropdown-item" href="/service/">Услуги</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/map/">Карта</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Прочие</a>
+                        </div> -->
+                    </li>
+                    <li class="nav-item active border-right px-xl-4 px-lg-2">
+                        <a class="nav-link" href="/questions/">Вопрос - ответ <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active border-right px-xl-4 px-lg-2">
+                        <a class="nav-link" href="/map/">Карта<span class="sr-only">(current)</span></a>
+                        <!-- <a class="nav-link" href="/appeal/">Обращение граждан <span class="sr-only">(current)</span></a> -->
+                    </li>
+                    <li class="nav-item active px-xl-4 px-lg-2">
+                        <a class="nav-link" href="/about/">О компании <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </nav>
+
+        {% endblock %}
+        <!-- </div> -->
+
+    <!-- Bootstrap 4 Scripts -->
+
+        <div class="row">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

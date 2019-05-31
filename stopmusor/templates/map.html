@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-xl-12">
+    <h1 class="text-center text-uppercase my-3">Карта расположения стихийных свалок</h1>
+</div>
+
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=9089eaf8-e08a-48b1-994f-1895c109beb7" type="text/javascript"></script>
+
+<!-- <div style="height: 800px; width: 1150px;"> -->
+    <!-- <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .controls {
+            margin-top: 10px;
+            border: 1px solid transparent;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 32px;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 300px;
+        }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+
+        .pac-container {
+            font-family: Roboto;
+        }
+
+        #type-selector {
+            color: #fff;
+            background-color: #4d90fe;
+            padding: 5px 11px 0px 11px;
+        }
+
+        #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+    </style>-->
+
+    <!-- <input id="pac-input" class="controls" type="text"
+           placeholder="Enter a location">
+    <div id="type-selector" class="controls">
+        <input type="radio" name="type" id="changetype-all" >
+        <label for="changetype-all">All</label>
+
+        <input type="radio" name="type" id="changetype-establishment">
+        <label for="changetype-establishment">Establishments</label>
+
+        <input type="radio" name="type" id="changetype-address">
+        <label for="changetype-address" checked="checked">Addresses</label>
+
+        <input type="radio" name="type" id="changetype-geocode">
+        <label for="changetype-geocode">Geocodes</label>
+    </div> -->
+	<div id="map" style="height: 800px; width: 1150px;"></div>
+	<script>
+			var myMap,
+				lat = 47.215, // Широта
+				lng = 38.899; // Долгота Таганрога
+
+			// Дождёмся загрузки API и готовности DOM.
+			ymaps.ready(init);
+			
+			function init () {
+				// Создание экземпляра карты и его привязка к контейнеру с
+				// заданным id ("map").
+				myMap = new ymaps.Map('map', {
+					// При инициализации карты обязательно нужно указать
+					// её центр и коэффициент масштабирования.
+					center: [lat, lng], // Коотринаты
+					zoom: 14
+				}, {
+					searchControlProvider: 'yandex#search'
+				}),
+
+				myGeoObject = new ymaps.GeoObject({
+					// Описание геометрии.
+					geometry: {
+						type: "Point",
+						coordinates: [lat, lng]
+					}
+					
+				})
+
+				myMap.geoObjects
+					.add(myGeoObject)
+					.add(new ymaps.Placemark([lat, lng-0.01], {
+						balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
+					}, {
+						preset: 'islands#icon',
+						iconColor: '#0095b6'
+					}))
+					.add(new ymaps.Placemark([lat, lng], {
+						balloonContent: '<strong>серобуромалиновый</strong> цвет'
+					}, {
+						preset: 'islands#dotIcon',
+						iconColor: '#735184'
+					}))
+				//document.getElementById('destroyButton').onclick = function () {
+					// Для уничтожения используется метод destroy.
+				//	myMap.destroy();
+				//};
+			
+			}
+	</script>
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSYBzSsLmsN_hkf7SIVOtJzwK2fCSaRZo&libraries=places&callback=initMap"
+		async defer>
+	</script> -->
+
+<!--</div>-->
+
+<!-- </div> -->
+<div class="col-xl-12">
+    <div class="card my-2">
+        <div class="card-header">
+            Установите точку на карте
+        </div>
+        <div class="card-body text-secondary">
+            <p class="card-text">Вы выбрали место на карте подтвердите нажатием на кнопку</p>
+            <p class="card-text">Введите ваше имя <input type="text" id="pname" name="query" class="form-control" placeholder="Имя" value=""></p>
+            <p class="card-text">Введите ваш Email <input type="text" id="pemail" name="query" class="form-control" placeholder="Имя" value=""></p>
+            <p class="card-text">Введите название обекта <input type="text" id="pobj" name="query" class="form-control" placeholder="Имя" value=""></p>
+            <p class="card-text">Координаты предложенного вами объекта: <span id="coord">-</span> </p>
+            <button type="submit" class="btn btn-primary text-center" id="akcept">Подтвердить</button>
+        </div>
+    </div>
+
+    {% if map %}
+        {% for m in map %}
+            <div class="card my-2">
+                <div class="card-header">
+                    Объект на карте:
+                </div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">Здесь расположинна стихийная свалка.</p>
+                    <p class="card-text">{{m.name}} Сообщил о {{m.object_name}} по адресу {{ m.adres }}</p>
+                    <p class="card-text">Дата добавления: {{ m.date }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% if map %}
+        {% for m in map %}
+        <!-- Тут выводятся баллуны на карте -->
+        {% endfor %}
+    {% endif %}
+
+   
+</div>
+
+{% endblock %}
